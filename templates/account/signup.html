@@ -1,0 +1,39 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load bootstrap_tags %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Sign Up" %}</h1>
+    
+    {% if user.is_authenticated %}
+        <p>{% trans "You are already logged in." %}</p>
+    {% else %}
+        <p>{% trans "Already have an account?" %} <a href="{% url acct_login %}">{% trans "Log In" %}</a>!</p>
+        
+        <form id="signup_form" method="post" action="{% url acct_signup %}" autocapitalize="off">
+            {% csrf_token %}
+            <fieldset>
+                {{ form|as_bootstrap }}
+            </fieldset>
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="actions">
+                <button type="submit" class="btn primary">{% trans "Sign Up" %}</button>
+            </div>
+        </form>
+        
+    {% endif %}
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(function(){
+            $("#id_username").focus();
+        });
+    </script>
+{% endblock %}
