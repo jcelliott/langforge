@@ -1,0 +1,53 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{{ language.name }}{% endblock %}
+
+{% block body_class %}language{% endblock %}
+
+{% block body_base %}
+    <div class="container">
+        {% include "_messages.html" %}
+        <div class="page-header">
+            <h1>{{ language.name }}   <small>created by {{ language.creator }}</small></h1>
+        </div>
+
+        {% if is_owner %}
+            <h3><a href="{% url language_edit_info language.id %}">Info</a></h3>
+        {% else %}
+            <h3>Info</h3>
+        {% endif %}
+        {% if language.info %}
+            {# <div class="well"> #}
+            {#     {{ language.info }} #}
+            {# </div> #}
+            <p>{{ language.info }}</p>
+        {% else %}
+            <p>There isn't any information about {{ language.name }} yet</p>
+        {% endif %}
+
+        {% if is_owner %}
+            <h3><a href="{% url language_edit_phonetics language.id %}">Phonetics</a></h3>
+        {% else %}
+            <h3>Phonetics</h3>
+        {% endif %}
+        {% if phonetics %}
+            <ul>
+                <li>Syllable template: {{ phonetics.syllable_template }}</li>
+                <li>Word template: {{ phonetics.word_template }}</li>
+                <li>Sounds: {% if is_owner %} <a href="{% url language_add_sound language.id %}">+ add sound</a> {% endif %}
+                    <ul>
+                    {% for sound in sounds %}
+                    <li>{{ sound.character }} {% if is_owner %} <a href="{% url language_remove_sound language.id sound.id %}"> (‒)</a> {% endif %}</li>
+                    {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+

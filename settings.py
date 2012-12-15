@@ -3,6 +3,7 @@
 
 import os.path
 import posixpath
+import logging
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -205,8 +206,8 @@ AUTHENTICATION_BACKENDS = [
     "pinax.apps.account.auth_backends.AuthenticationBackend",
 ]
 
-LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
-LOGIN_REDIRECT_URLNAME = "what_next"
+LOGIN_URL = "/account/login/"
+LOGIN_REDIRECT_URLNAME = "home"
 LOGOUT_REDIRECT_URLNAME = "home"
 
 EMAIL_CONFIRMATION_DAYS = 2
@@ -222,3 +223,10 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+# if DEBUG:
+#     logging.basicConfig(
+#         level = logging.DEBUG,
+#         format = '%(asctime)s %(levelname)s %(message)s',
+#     )
+# 

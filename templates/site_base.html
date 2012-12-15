@@ -6,14 +6,14 @@
 {% block nav %}
     {% if user.is_authenticated %}
         <ul>{% spaceless %}
-            <li id="tab_forge"><a>{% trans "The Forge" %}</a></li>
+            <li id="tab_forge"><a href="{% url language_user_languages %}">{% trans "The Forge" %}</a></li>
+            <li id="tab_languages"><a href="{% url language_all_languages %}">{% trans "Languages" %}</a></li>
             <li id="tab_profile"><a href="{% url profile_detail user.username %}">{% trans "Profile" %}</a></li>
-            <li id="tab_notices"><a href="{% url notification_notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></li>
-            <li id="tab_languages"><a>{% trans "Languages" %}</a></li>
+            {# <li id="tab_notices"><a href="{% url notification_notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></li> #}
         {% endspaceless %}</ul>
     {% else %}
         <ul>{% spaceless %}
-            <li id="tab_languages"><a>{% trans "Languages" %}</a></li>
+          <li id="tab_languages"><a href="{% url language_all_languages %}">{% trans "Languages" %}</a></li>
         {% endspaceless %}</ul>
     {% endif %}
 {% endblock %}
