@@ -3,6 +3,7 @@ langforge
 
 ###installation###
 
+    pip install virtualenv (or install it with your package manager, it will probably be called python-virtualenv)
     virtualenv langforge-env
     cd langforge-env
     source bin/activate
@@ -12,6 +13,6 @@ change `pip.call_subprocess` to `pip.util.call_subprocess` to fix [a bug](http:/
 
     pinax-admin setup_project -b basic temp
     rm -rf temp
-    git clone <this repository>
+    git clone git://github.com/joshuacelliott/langforge.git
     cd langforge
     python manage.py runserver
